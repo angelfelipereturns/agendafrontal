@@ -1,4 +1,4 @@
-package com.afaf.demospringboot;
+package com.afaf.agendafrontal;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -12,7 +12,7 @@ import com.afaf.agendafrontal.controller.ContactoController;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
-public class DemospringbootApplicationTests {
+public class AgendaFrontalApplicationTests {
 	
 	@Autowired
 	private ContactoController contactoController;
