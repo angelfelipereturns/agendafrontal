@@ -1,0 +1,46 @@
+@charset "ISO-8859-1";
+
+.container h2{
+    text-align: center;
+    margin-top: 50px;
+    margin-bottom: 40px;
+}
+
+.div-info-contacto{
+    display: inline-block;
+}
+
+.container span{
+    font-weight: bold;
+}
+
+.container ul{
+    margin-top: 10px;
+}
+
+.formOpcion {
+    display: initial;
+}
+
+#btn-borrar, #btn-modificar{
+    float: right;
+    margin-left: 20px;
+}
+
+.div-btn-nuevo{
+    margin-top: 50px;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+}
+
+.formContacto{
+    margin-left: auto;
+    margin-right: auto;
+    width: 200px;
+}
+
+#guardar, #modificar{
+    margin-top: 50px;
+}
+

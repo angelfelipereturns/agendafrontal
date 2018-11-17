@@ -1,0 +1,10 @@
+Manifest-Version: 1.0
+Implementation-Title: demospringboot
+Implementation-Version: 0.0.1-SNAPSHOT
+Built-By: afalaminos
+Implementation-Vendor-Id: com.afaf
+Build-Jdk: 1.8.0_181
+Implementation-URL: https://projects.spring.io/spring-boot/#/spring-bo
+ ot-starter-parent/demospringboot
+Created-By: Maven Integration for Eclipse
+

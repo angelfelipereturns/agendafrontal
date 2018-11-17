@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+	<head>
+		<meta charset="ISO-8859-1">
+		<title>Contactos Spring Boot</title>
+		<link rel="stylesheet" th:href="@{/css/style.css}" />
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" />
+	</head>
+	<body>
+		<div class="container">
+			<h2>Contactos con Spring Boot</h2>
+			<ul class="list-group" th:each="contacto : ${contactos}">
+				<li class="list-group-item">
+					<div class="div-info-contacto">
+						<span th:text="${contacto.nombre}"></span>
+						<span th:text="${contacto.apellidos}"></span> -
+					</div> 
+					<div class="div-info-contacto">
+						Telefono: <span th:text="${contacto.telefono}"></span> - 
+					</div>
+					<div class="div-info-contacto">
+						Email: <span th:text="${contacto.email}"></span>
+					</div>
+					<form method="POST" class="formOpcion">
+						<input type="hidden" th:value="${contacto.id}" name="id" />
+						<input type="hidden" th:value="borrar" name="opcion" />
+						<button id="btn-borrar" type="submit" class="btn btn-alert">Borrar</button>
+					</form>
+					<form method="POST" class="formOpcion">
+						<input type="hidden" th:value="${contacto.id}" name="id" />
+						<input type="hidden" th:value="modificar" name="opcion" />
+						<button id="btn-modificar" type="submit" class="btn btn-alert">Modificar</button>
+					</form>
+				</li>
+			</ul>
+			<div class="div-btn-nuevo">
+				<a id="nuevo" class="btn btn-primary" th:href="@{/nuevocontacto}" role="button">Nuevo Contacto</a>
+			</div>
+		</div>
+
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+		<script th:src="@{/js/funcionesjs.js}"></script>
+	</body>
+</html>
