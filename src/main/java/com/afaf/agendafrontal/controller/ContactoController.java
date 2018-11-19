@@ -1,9 +1,12 @@
 package com.afaf.agendafrontal.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.validation.Valid;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -19,11 +22,19 @@ public class ContactoController {
 	
 	@Autowired
 	private ContactoRestClient contactoRestClient;
+	
+	final static Logger logger = LoggerFactory.getLogger(ContactoController.class);
+	
 
 	@RequestMapping(value="/", method=RequestMethod.GET)
 	public ModelAndView home() {
 		ModelAndView modelAndView = new ModelAndView();
-		List<Contacto> contactos = contactoRestClient.consultaTodos();
+		List<Contacto> contactos = new ArrayList<Contacto>();
+		try {
+			contactos = contactoRestClient.consultaTodos();
+		} catch (Exception e) {
+			logger.error(e.getMessage());
+		}
 		modelAndView.addObject("contactos", contactos);
 		modelAndView.setViewName("home");
 		return modelAndView;
@@ -39,7 +50,11 @@ public class ContactoController {
 	@RequestMapping(value="/nuevocontacto", method=RequestMethod.POST)
 	public ModelAndView nuevoContacto(@Valid Contacto contacto) {
 		ModelAndView modelAndView = new ModelAndView();
-		contactoRestClient.guardaContacto(contacto);
+		try {
+			contactoRestClient.guardaContacto(contacto);
+		} catch (Exception e) {
+			logger.error(e.getMessage());
+		}
 		modelAndView.setViewName("redirect:/");
 		return modelAndView;
 	}
@@ -48,12 +63,21 @@ public class ContactoController {
 	public ModelAndView opcionContacto(@RequestParam Long id, @RequestParam String opcion) {
 		ModelAndView modelAndView = new ModelAndView();
 		if("modificar".equals(opcion)) {
-			Contacto contacto = contactoRestClient.consultaPorId(id);
+			Contacto contacto = new Contacto();
+			try {
+				contacto = contactoRestClient.consultaPorId(id);
+			} catch (Exception e) {
+				logger.error(e.getMessage());
+			}
 			modelAndView.addObject("contacto", contacto);
 			modelAndView.setViewName("modificacontacto");
 		}
 		else if("borrar".equals(opcion)) {
-			contactoRestClient.borraContacto(id);
+			try {
+				contactoRestClient.borraContacto(id);
+			} catch (Exception e) {
+				logger.error(e.getMessage());
+			}
 			modelAndView.setViewName("redirect:/");
 		}
 		return modelAndView;
@@ -63,7 +87,11 @@ public class ContactoController {
 	public ModelAndView modificaContacto(@Valid Contacto contacto, @RequestParam Long id) {
 		ModelAndView modelAndView = new ModelAndView();
 		contacto.setId(id);
-		contactoRestClient.modificaContacto(contacto, id);
+		try {
+			contactoRestClient.modificaContacto(contacto, id);
+		} catch (Exception e) {
+			logger.error(e.getMessage());
+		}
 		modelAndView.setViewName("redirect:/");
 		return modelAndView;
 	}
