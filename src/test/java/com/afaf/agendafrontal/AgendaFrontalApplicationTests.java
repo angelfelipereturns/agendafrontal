@@ -9,6 +9,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import com.afaf.agendafrontal.controller.ContactoController;
+import com.afaf.agendafrontal.rest.ContactoRestClient;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
@@ -16,10 +17,15 @@ public class AgendaFrontalApplicationTests {
 	
 	@Autowired
 	private ContactoController contactoController;
+	
+	@Autowired
+	private ContactoRestClient contactoRestClient;
 
+	
 	@Test
 	public void contextLoads() {
 		assertThat(contactoController).isNotNull();
+		assertThat(contactoRestClient).isNotNull();
 	}
 
 }
