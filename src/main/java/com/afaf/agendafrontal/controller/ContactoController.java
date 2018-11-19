@@ -52,10 +52,11 @@ public class ContactoController {
 		ModelAndView modelAndView = new ModelAndView();
 		try {
 			contactoRestClient.guardaContacto(contacto);
+			modelAndView.setViewName("redirect:/");
 		} catch (Exception e) {
+			modelAndView.setViewName("redirect:/error");
 			logger.error(e.getMessage());
 		}
-		modelAndView.setViewName("redirect:/");
 		return modelAndView;
 	}
 	
@@ -66,19 +67,21 @@ public class ContactoController {
 			Contacto contacto = new Contacto();
 			try {
 				contacto = contactoRestClient.consultaPorId(id);
+				modelAndView.addObject("contacto", contacto);
+				modelAndView.setViewName("modificacontacto");
 			} catch (Exception e) {
+				modelAndView.setViewName("redirect:/error");
 				logger.error(e.getMessage());
 			}
-			modelAndView.addObject("contacto", contacto);
-			modelAndView.setViewName("modificacontacto");
 		}
 		else if("borrar".equals(opcion)) {
 			try {
 				contactoRestClient.borraContacto(id);
+				modelAndView.setViewName("redirect:/");
 			} catch (Exception e) {
+				modelAndView.setViewName("redirect:/error");
 				logger.error(e.getMessage());
 			}
-			modelAndView.setViewName("redirect:/");
 		}
 		return modelAndView;
 	}
@@ -89,10 +92,11 @@ public class ContactoController {
 		contacto.setId(id);
 		try {
 			contactoRestClient.modificaContacto(contacto, id);
+			modelAndView.setViewName("redirect:/");
 		} catch (Exception e) {
+			modelAndView.setViewName("redirect:/error");
 			logger.error(e.getMessage());
 		}
-		modelAndView.setViewName("redirect:/");
 		return modelAndView;
 	}
 	
